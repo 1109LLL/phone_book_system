@@ -21,4 +21,5 @@ import contacts.api_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/persons/', contacts.api_views.PersonList.as_view()),
+    path('api/v1/persons/new', contacts.api_views.PersonCreation.as_view()),
 ]
