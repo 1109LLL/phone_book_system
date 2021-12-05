@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/persons/', contacts.api_views.PersonList.as_view()),
     path('api/v1/persons/new', contacts.api_views.PersonCreation.as_view()),
-    path('api/v1/persons/<int:id>/destroy', contacts.api_views.PersonDestroy.as_view()),
+    path('api/v1/persons/<int:id>/delete', contacts.api_views.PersonDestroy.as_view()),
     path('api/v1/persons/<int:id>/update', contacts.api_views.PersonRetrieveUpdate.as_view()),
 ]
