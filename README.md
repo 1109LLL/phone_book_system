@@ -1,1 +1,36 @@
 # phone_book_system
+This is a phone book system developed using Django. A RESTful API is constructed using Django's REST Framework. 
+
+User can view existing contacts in the phone book and perform add, delete and update operations by interacting with the API.
+
+# Mannual
+### Install packages:
+This project requires Django, and its REST framwork packages which can be installed using pip:
+> $ pip install Django
+>
+> $ pip install djangorestframework
+
+### Run application:
+1. Go into project directory (same level as the manage.py file):
+    > $ cd phone_book
+1. Apply database migrations
+    > $ python3 manage.py migrate
+1. Start Django application server:
+    > $ python3 manage.py runserver
+
+### Interacting with API:
+Django's REST Framework provides API interfaces that user can directly interact with, which is a convenient alternative to using <code>curl</code> methods.
+- VIEW list of contacts in the current phone book:
+    > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/
+- ADD new person to contact:
+    > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/new
+- UPDATE an existing contact by matching to the 'id' field.
+    > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/\<int:id>/update
+    >
+    > For example, update person which has <code>id</code> = 1.
+    > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/1/update
+- DELETE an existing contact by matching to the 'id' field.
+    > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/\<int:id>/delete
+    >
+    > For example, delete person which has <code>id</code> = 1.
+    > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/1/delete
