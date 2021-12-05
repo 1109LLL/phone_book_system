@@ -25,12 +25,18 @@ Django's REST Framework provides API interfaces that user can directly interact 
 - ADD new person to contact:
     > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/new
 - UPDATE an existing contact by matching to the 'id' field.
-    > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/\<int:id>/update
+    > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/\<int:id\>/update
     >
     > For example, update person which has <code>id</code> = 1.
     > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/1/update
 - DELETE an existing contact by matching to the 'id' field.
-    > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/\<int:id>/delete
+    > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/\<int:id\>/delete
     >
     > For example, delete person which has <code>id</code> = 1.
     > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/1/delete
+
+# Testing:
+### API tests
+Test cases for APIs are located in the <code>/phone_book/contacts/tests.py</code> file. The unit tests are written using Django's REST framework's testing cases.
+> $ cd phone_book
+> $ python3 manage.py test
