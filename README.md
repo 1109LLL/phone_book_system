@@ -39,4 +39,20 @@ Django's REST Framework provides API interfaces that user can directly interact 
 ### API tests
 Test cases for APIs are located in the <code>/phone_book/contacts/tests.py</code> file. The unit tests are written using Django's REST framework's testing cases.
 > $ cd phone_book
+>
 > $ python3 manage.py test
+
+### Coverage test
+Use <code>Coverage.py</code> to check code coverage of the project. 
+[Documentation](https://coverage.readthedocs.io/en/6.2/)
+1. Install tool:
+    > $ pip install coverage
+1. Unit tests for the API may also be run with coverage:
+    > cd phone_book
+    > coverage run manage.py test
+1. Generate table report:
+    > $ coverage report -m
+1. For a nicer presentation, use coverage html to get annotated HTML listings detailing missed lines:
+    > $ coverage html
+    >
+    > This command generates a <code>htmlcov</code> folder. Then open <code>htmlcov/index.html</code> in a browser to see the results.
