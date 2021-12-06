@@ -6,10 +6,8 @@ User can view existing contacts in the phone book and perform add, delete and up
 ## Mannual
 ### Install packages:
 This project requires: <code>Django</code>, <code>Django REST framwork</code>, <code>Django-cors-headers</code>:
-> $ pip install Django
->
-> $ pip install djangorestframework
->
+> $ pip install Django\
+> $ pip install djangorestframework\
 > $ pip install django-cors-headers
 
 ### Run application:
@@ -27,7 +25,7 @@ Django's REST Framework provides API interfaces that user can directly interact 
 - ADD new person to contact:
     > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/new
 - UPDATE an existing contact by matching to the 'id' field.
-    > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/\<int:id\>/update
+    > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/<int:id>/update
     >
     > For example, update person which has <code>id</code> = 1.
     > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/1/update
@@ -71,6 +69,7 @@ To install using Homebrew:
 > $ brew install npm\
 > $ brew install node\
 > $ npm install --global yarn\
+
 Verify the packages have been install successfully:\
 > $ npm -v\
 > $ node -v\
