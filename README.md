@@ -27,7 +27,7 @@ Django's REST Framework provides API interfaces that user can directly interact 
 - ADD new person to contact:
     > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/new
 - UPDATE an existing contact by matching to the 'id' field.
-    > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/\<int:id>/update
+    > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/\<int:id\>/update
     >
     > For example, update person which has <code>id</code> = 1.
     > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/1/update
@@ -68,31 +68,24 @@ The front end is built using the React Javascript library, which consumes the Dj
 This requires the following package: <code>npm</code>, <code>node</code>, <code>yarn</code>.
 
 To install using Homebrew:
-> $ brew install npm
->
-> $ brew install node
->
-> $ npm install --global yarn
-Verify the packages have been install successfully:
-> $ npm -v
->
-> $ node -v
->
+> $ brew install npm\
+> $ brew install node\
+> $ npm install --global yarn\
+Verify the packages have been install successfully:\
+> $ npm -v\
+> $ node -v\
 > $ yarn --version
 
 #### Notes:
 - <code>npx</code> is the package runner used by npm to execute packages in place of a global install.
 - This front-end web starts off by using <code>create-react-app</code>, which is an excellent tool for beginners that allows you to create and run React project very quickly.
-    > Run the following command to install the tool:
-    >
+    > Run the following command to install the tool:\
     > $ npm i create-react-app
 - <code>create-react-app</code> uses <code>yarn</code> for the setup if it's installed.
 
 ### Run application:
 1. Make sure Django server is running and database has been migrated.
 1. Run the React app:
-    > $ cd react-api
-    >
-    > $ npm start
-    >
+    > $ cd react-api\
+    > $ npm start\
     > Open http://localhost:3000 in browser.
