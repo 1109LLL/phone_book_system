@@ -80,3 +80,4 @@ Verify the packages have been install successfully:
     > Run the following command to install the tool:
     >
     > $ npm i create-react-app
+- <code>create-react-app</code> uses <code>yarn</code> for the setup if it's installed.
