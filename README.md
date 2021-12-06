@@ -3,12 +3,14 @@ This is a phone book system developed using Django. A RESTful API is constructed
 
 User can view existing contacts in the phone book and perform add, delete and update operations by interacting with the API.
 
-# Mannual
+## Mannual
 ### Install packages:
-This project requires Django, and its REST framwork packages which can be installed using pip:
+This project requires: <code>Django</code>, <code>Django REST framwork</code>, <code>Django-cors-headers</code>:
 > $ pip install Django
 >
 > $ pip install djangorestframework
+>
+> $ pip install django-cors-headers
 
 ### Run application:
 1. Go into project directory (same level as the manage.py file):
@@ -35,7 +37,7 @@ Django's REST Framework provides API interfaces that user can directly interact 
     > For example, delete person which has <code>id</code> = 1.
     > Open browser and type in: http://127.0.0.1:8000/api/v1/persons/1/delete
 
-# Testing:
+## Testing:
 ### API tests
 Test cases for APIs are located in the <code>/phone_book/contacts/tests.py</code> file. The unit tests are written using Django's REST framework's testing cases.
 > $ cd phone_book
@@ -61,23 +63,36 @@ Use <code>Coverage.py</code> to check code coverage of the project.
 # UI - Front-end
 The front end is built using the React Javascript library, which consumes the Django API to gain access to the phone book.
 
-# Mannual
+## Mannual
 ### Install packages:
-This requires the following package: <code>npm</code>, <code>node</code>.
+This requires the following package: <code>npm</code>, <code>node</code>, <code>yarn</code>.
 
 To install using Homebrew:
 > $ brew install npm
 >
 > $ brew install node
+>
+> $ npm install --global yarn
 Verify the packages have been install successfully:
 > $ npm -v
 >
 > $ node -v
+>
+> $ yarn --version
 
-### Notes:
+#### Notes:
 - <code>npx</code> is the package runner used by npm to execute packages in place of a global install.
 - This front-end web starts off by using <code>create-react-app</code>, which is an excellent tool for beginners that allows you to create and run React project very quickly.
     > Run the following command to install the tool:
     >
     > $ npm i create-react-app
 - <code>create-react-app</code> uses <code>yarn</code> for the setup if it's installed.
+
+### Run application:
+1. Make sure Django server is running and database has been migrated.
+1. Run the React app:
+    > $ cd react-api
+    >
+    > $ npm start
+    >
+    > Open http://localhost:3000 in browser.
