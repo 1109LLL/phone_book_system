@@ -1,89 +1,71 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 
-class UpdateForm extends Component {
-	constructor(props) {
-    super(props);
 
-    this.state = {
-      showForm: false,
-			attrs: props.person
-    };
-		this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-		this.getContacts = this.getContacts.bind(this);
-		this.updatedAttrs = props.person
-  }
+function PostForm(props) {
 
-	
-	getContacts() {
-		let api_view_list = 'http://127.0.0.1:8000/api/v1/persons/'
-		fetch(api_view_list)
-		.then((response => response.json()))
-		.then(this.props.setContact);
-	
+	const [attrsForm, setAttrsForm] = useState({
+		showForm: false
+	})
+
+	const [personDetail, setPersonDetail] = useState({...props.person})
+
+	let updateURL = `http://127.0.0.1:8000/api/v1/persons/${props.person.id}/update`
+
+	function handleSubmit(event) {
+		event.preventDefault();
+		Axios.patch(updateURL, {
+									first_name: personDetail.first_name,
+									last_name: personDetail.last_name,
+									phone: parseInt(personDetail.phone,10),
+									email:personDetail.email
+		})
+		.then(res => {console.log(res.data)})
 	}
 
-	handleSubmit() {
-		console.log(this.state.attrs)
-		let updateURL = `http://127.0.0.1:8000/api/v1/persons/${this.props.person.id}/update`
-		fetch(updateURL, { method: 'PATCH', 
-												body: JSON.stringify(this.state.attrs)}, )
-		// .then(this.getContacts);
+	function handleChange(event) {
+		const updatedData = {...personDetail}
+		updatedData[event.target.id] = event.target.value
+		setPersonDetail(updatedData)
 	}
 
-	handleChange(event){
-		const name = event.target.name;
-		const value = event.target.value;
-		// const attrs_holder = this.state.attrs
-		// attrs_holder[name] = value
-		this.updatedAttrs[name] = value
-    // this.setState({
-		// 	attrs: attrs_holder
-		// })
-	}
-
-	showForm = () => {
+	function showForm () {
 		return (
 			<div>
-				<form onSubmit={this.handleSubmit}>
+				<form onSubmit={(event) => handleSubmit(event)}>
 					<label>
-						First name:
-							<input type="text" defaultValue={this.props.person.first_name} onChange={this.handleChange}/>
+						First name: <input type="text" id="first_name" defaultValue={props.person.first_name} onChange={handleChange}/>
 					</label>
 					<label>
-						Last name:
-							<input type="text" defaultValue={this.props.person.last_name} onChange={this.handleChange}/>
+						Last name: <input type="text" id="last_name" defaultValue={props.person.last_name} onChange={handleChange}/>
 					</label>
 					<label>
-						Phone:
-						<input type="text" defaultValue={this.props.person.phone} onChange={this.handleChange}/>
+						Phone: <input type="number" id="phone" defaultValue={props.person.phone} onChange={handleChange}/>
 					</label>
 					<label>
-						Email:
-							<input type="text" defaultValue={this.props.person.email} onChange={this.handleChange}/>
+						Email: <input type="text" id="email" defaultValue={props.person.email} onChange={handleChange}/>
 					</label>
-					<input type="submit" value="Save"/>
+					<button>Save</button>
 				</form>
 			</div>
-		);
+		)
 	}
 
-	render() {
-		return (
-				<div className='manage-app'>
-					<button onClick={() => this.setState({showForm: true}) }>edit</button>
-					{this.state.showForm ? this.showForm() : null}
-				</div>
-		);
-	}
+	return (
+		<div>
+			<button onClick={() => setAttrsForm({showForm: !attrsForm.showForm}) }>edit</button>
+			{attrsForm.showForm ? showForm() : null}
+		</div>
+	);
 }
+
 
 function Contacts({ contacts }) {
 	function getContacts () {
 		let api_view_list = 'http://127.0.0.1:8000/api/v1/persons/'
 		fetch(api_view_list)
 		.then((response => response.json()))
-		.then(contacts[1]);
+		.then(contacts[1]); //call setContactList to automatically refresh the page with values in response
 	}
 
 	function apiDelete(idToProcess) {
@@ -94,19 +76,19 @@ function Contacts({ contacts }) {
 	}
 
 	return (
-	<div>
-		{contacts[0].map((contact) => (
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">{contact.first_name + " " + contact.last_name}</h5>
-					<p class="card-text">{"Phone: " + contact.phone}</p>
-					<h6 class="card-subtitle mb-2 text-muted">{"Email: " + contact.email}</h6>
-					<UpdateForm person={contact} setContact={contacts[1]}/>
-					<button onClick={() => apiDelete(contact.id)}>delete</button>
+		<div>
+			{contacts[0].map((contact) => (
+				<div className="card" key={contact.id}>
+					<div className="card-body">
+						<h5 className="card-title">{contact.first_name + " " + contact.last_name}</h5>
+						<p className="card-text">{"Phone: " + contact.phone}</p>
+						<h6 className="card-subtitle mb-2 text-muted">{"Email: " + contact.email}</h6>
+						<PostForm person={contact} setContact={contacts[1]}/>
+						<button onClick={() => apiDelete(contact.id)}>delete</button>
+					</div>
 				</div>
-			</div>
-		))}
-	</div>
+			))}
+		</div>
 	)
 };
 
@@ -121,6 +103,7 @@ function App() {
 	}, []);
 
   if (contactList) {
+		// const contactListObj = contactList.map((contact, i) => ({id: i,}))
 		return (
 			<div>
 				<center><h1>Phone Book</h1></center>
@@ -133,6 +116,7 @@ function App() {
   }
 	return <div>Empty phone book</div>
 }
+
 export default App;
 
 
