@@ -1,4 +1,4 @@
-import { useState, useEffect, Componentent } from 'react';
+import { useState, useEffect, Component } from 'react';
 
 const Contacts = ({ contacts }) => {
 	const [contactList, setContactList] = useState(contacts)
