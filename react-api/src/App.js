@@ -92,6 +92,68 @@ function Contacts({ contacts }) {
 	)
 };
 
+
+function AddContact(props) {
+	const [attrsForm, setAttrsForm] = useState({
+		showForm: false
+	})
+
+	const [personDetail, setPersonDetail] = useState({
+		first_name: "",
+		last_name: "",
+		phone: "",
+		email: ""
+	})
+
+	const postURL = 'http://127.0.0.1:8000/api/v1/persons/new'
+
+	function handleSubmit(event) {
+		event.preventDefault();
+		Axios.post(postURL, {
+									first_name: personDetail.first_name,
+									last_name: personDetail.last_name,
+									phone: parseInt(personDetail.phone,10),
+									email: personDetail.email
+		})
+		.then(res => {console.log(res.data)})
+	}
+
+	function handleChange(event) {
+		const updatedData = {...personDetail}
+		updatedData[event.target.id] = event.target.value
+		setPersonDetail(updatedData)
+	}
+
+	function showForm () {
+		return (
+			<div>
+				<form onSubmit={(event) => handleSubmit(event)}>
+					<label>
+						First name: <input type="text" id="first_name" onChange={handleChange}/>
+					</label>
+					<label>
+						Last name: <input type="text" id="last_name" onChange={handleChange}/>
+					</label>
+					<label>
+						Phone: <input type="number" id="phone" onChange={handleChange}/>
+					</label>
+					<label>
+						Email: <input type="text" id="email" onChange={handleChange}/>
+					</label>
+					<button>Save</button>
+				</form>
+			</div>
+		)
+	}
+
+	return (
+		<div>
+			<button onClick={() => setAttrsForm({showForm: !attrsForm.showForm}) }>Add Contact</button>
+			{attrsForm.showForm ? showForm() : null}
+		</div>
+	);
+}
+
 function App() {
   const [contactList, setContactList] = useState(null)
 	const api_view_list = 'http://127.0.0.1:8000/api/v1/persons/'
@@ -108,7 +170,7 @@ function App() {
 			<div>
 				<center><h1>Phone Book</h1></center>
 				<div>
-					<button>Add Contact</button>
+					<AddContact />
 					<Contacts contacts={[contactList, setContactList]} />
 				</div>
 			</div>
