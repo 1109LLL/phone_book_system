@@ -1,5 +1,6 @@
 from django.db.models.query import QuerySet
 from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView, RetrieveUpdateAPIView
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from contacts.serializers import PersonSerializer
 from contacts.models import Person
@@ -27,4 +28,3 @@ class PersonRetrieveUpdate(RetrieveUpdateAPIView):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
     lookup_field = 'id'
-

@@ -68,7 +68,8 @@ This requires the following package: <code>npm</code>, <code>node</code>, <code>
 To install using Homebrew:
 > $ brew install npm\
 > $ brew install node\
-> $ npm install --global yarn
+> $ npm install --global yarn\
+> $ npm install axios
 
 Verify the packages have been install successfully:\
 > $ npm -v\

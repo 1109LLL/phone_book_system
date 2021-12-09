@@ -61,11 +61,16 @@ function PostForm(props) {
 
 
 function Contacts({ contacts }) {
+	console.log(contacts)
 	function getContacts () {
 		let api_view_list = 'http://127.0.0.1:8000/api/v1/persons/'
 		fetch(api_view_list)
 		.then((response => response.json()))
 		.then(contacts[1]); //call setContactList to automatically refresh the page with values in response
+	}
+
+	function deletePerson(idToDelete) {
+
 	}
 
 	function apiDelete(idToProcess) {
@@ -93,7 +98,7 @@ function Contacts({ contacts }) {
 };
 
 
-function AddContact(props) {
+function AddContact() {
 	const [attrsForm, setAttrsForm] = useState({
 		showForm: false
 	})
@@ -165,7 +170,7 @@ function App() {
 	}, []);
 
   if (contactList) {
-		// const contactListObj = contactList.map((contact, i) => ({id: i,}))
+		console.log(contactList)
 		return (
 			<div>
 				<center><h1>Phone Book</h1></center>
